@@ -28,7 +28,7 @@ export default function App() {
   }
 
     
-  const { signOut } = useAuthenticator();
+  const { user, signOut } = useAuthenticator();
 
   useEffect(() => {
     listTodos();
@@ -42,6 +42,7 @@ export default function App() {
 
   return (
     <main>
+      <h1>{user?.signInDetails?.loginId}'s todos</h1>
       <h1>My todos</h1>
       <button onClick={createTodo}>+ new</button>
       <ul>
