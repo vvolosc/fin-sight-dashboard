@@ -1,4 +1,5 @@
 'use client';
+import '../proxy';
 import { useEffect } from 'react';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useRouter } from 'next/navigation';
