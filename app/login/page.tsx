@@ -1,8 +1,9 @@
 'use client';
 
-import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
 export default function LoginPage() {

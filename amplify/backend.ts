@@ -1,8 +1,9 @@
 import { defineBackend } from '@aws-amplify/backend';
-import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+import { CfnGraphQLApi } from 'aws-cdk-lib/aws-appsync';
 import { Rule, Schedule } from 'aws-cdk-lib/aws-events';
 import { LambdaFunction } from 'aws-cdk-lib/aws-events-targets';
-import { CfnGraphQLApi } from 'aws-cdk-lib/aws-appsync';
+import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
+
 import { auth } from './auth/resource';
 import { data } from './data/resource';
 import { seedHandler } from './functions/seed-handler/resource';

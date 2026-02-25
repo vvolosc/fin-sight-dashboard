@@ -1,5 +1,7 @@
-import { generateServerClientUsingCookies } from '@aws-amplify/adapter-nextjs/api';
 import { cookies } from 'next/headers';
+
+import { generateServerClientUsingCookies } from '@aws-amplify/adapter-nextjs/api';
+
 import config from '../amplify_outputs.json';
 
 const client = generateServerClientUsingCookies({ config, cookies });

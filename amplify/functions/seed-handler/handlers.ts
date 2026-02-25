@@ -1,6 +1,7 @@
+import { defaultProvider } from '@aws-sdk/credential-provider-node';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
-import { defaultProvider } from '@aws-sdk/credential-provider-node';
+
 import type { Schema } from '../../data/resource';
 
 const symbols = ['BTC', 'ETH', 'SOL', 'DOT', 'ADA'];
