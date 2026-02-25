@@ -34,7 +34,7 @@ export const handler = async () => {
           clearCredentialsAndIdentityId: async () => {},
         },
       },
-    },
+    }
   );
 
   const client = generateClient<Schema>();

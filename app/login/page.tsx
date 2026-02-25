@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import { useEffect } from 'react';
@@ -15,7 +15,5 @@ export default function LoginPage() {
     }
   }, [route, router]);
 
-  return (
-    <Authenticator />
-  );
+  return <Authenticator />;
 }

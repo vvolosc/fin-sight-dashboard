@@ -11,15 +11,12 @@ export async function proxy(request) {
       try {
         const session = await fetchAuthSession(contextSpec);
 
-        return (
-          session.tokens?.accessToken !== undefined &&
-          session.tokens?.idToken !== undefined
-        );
+        return session.tokens?.accessToken !== undefined && session.tokens?.idToken !== undefined;
       } catch (error) {
         console.log(error);
         return false;
       }
-    }
+    },
   });
 
   if (authenticated) {
@@ -29,10 +26,8 @@ export async function proxy(request) {
   return NextResponse.redirect(new URL('/login', request.url));
 }
 
-
-
 export const config = {
-      matcher: [
+  matcher: [
     /*
      * Match all request paths except for the ones starting with:
      * - api (API routes)
@@ -40,6 +35,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|login).*)'
-  ]
-}
+    '/((?!api|_next/static|_next/image|favicon.ico|login).*)',
+  ],
+};

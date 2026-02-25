@@ -7,7 +7,6 @@ const client = generateServerClientUsingCookies({ config, cookies });
 const Dashboard = async () => {
   const { data: transactions } = await client.models?.Transaction?.list({ authMode: 'apiKey' });
 
-
   return (
     <>
       <div>{JSON.stringify(transactions)}</div>

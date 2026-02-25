@@ -16,10 +16,7 @@ const backend = defineBackend({
 const cfnApi = backend.data.resources.cfnResources.cfnGraphqlApi;
 const appsyncUrl = cfnApi.attrGraphQlUrl;
 
-backend.seedHandler.addEnvironment(
-  'AMPLIFY_DATA_GRAPHQL_ENDPOINT',
-  appsyncUrl,
-);
+backend.seedHandler.addEnvironment('AMPLIFY_DATA_GRAPHQL_ENDPOINT', appsyncUrl);
 
 const appsyncPolicy = new PolicyStatement({
   actions: ['appsync:GraphQL'],
