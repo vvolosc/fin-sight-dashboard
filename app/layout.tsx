@@ -3,9 +3,10 @@ import type { Metadata } from 'next';
 import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 
-import outputs from '../amplify_outputs.json';
-import AuthContextProvider from './AuthContextProvider';
-import ConfigureAmplifyClientSide from './ConfigureAmplifyClientSide';
+import outputs from '@/amplify_outputs.json';
+import AuthContextProvider from '@/app/AuthContextProvider';
+import ConfigureAmplifyClientSide from '@/app/ConfigureAmplifyClientSide';
+
 import './app.css';
 
 export const metadata: Metadata = {
