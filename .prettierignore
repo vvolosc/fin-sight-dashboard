@@ -1,0 +1,8 @@
+.next
+node_modules
+dist
+build
+.amplify
+aws_backup
+awscliv2.zip.bak
+package-lock.json
