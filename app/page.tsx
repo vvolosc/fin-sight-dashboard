@@ -1,23 +1,18 @@
-'use client';
-import '../proxy';
-import { useEffect } from 'react';
-import { useAuthenticator } from '@aws-amplify/ui-react';
-import { useRouter } from 'next/navigation';
+import { generateServerClientUsingCookies } from '@aws-amplify/adapter-nextjs/api';
+import { cookies } from 'next/headers';
+import config from '../amplify_outputs.json';
 
-const Dashboard = () => {
-  const { user, signOut, route } = useAuthenticator();
-    const router = useRouter();
-  
-    useEffect(() => {
-      if (route === 'signOut') {
-        router.push('/login');
-      }
-    }, [route, router]);
-    
-  return <>
-    <h1>Dashboard {user?.username}</h1>
-    <button onClick={signOut}>Sign out</button>
-  </>;
-}
+const client = generateServerClientUsingCookies({ config, cookies });
+
+const Dashboard = async () => {
+  const { data: transactions } = await client.models?.Transaction?.list({ authMode: 'apiKey' });
+
+
+  return (
+    <>
+      <div>{JSON.stringify(transactions)}</div>
+    </>
+  );
+};
 
 export default Dashboard;
