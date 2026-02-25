@@ -7,7 +7,7 @@ import outputs from '@/amplify_outputs.json';
 import AuthContextProvider from '@/app/AuthContextProvider';
 import ConfigureAmplifyClientSide from '@/app/ConfigureAmplifyClientSide';
 
-import './app.css';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Fin Sight Dashboard',
