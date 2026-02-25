@@ -41,4 +41,5 @@ amplify_outputs*
 amplifyconfiguration*
 
 .idea
-aws
+aws/
+!aws/README.md
