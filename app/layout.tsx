@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 
-import '@aws-amplify/ui-react/styles.css';
 import { Amplify } from 'aws-amplify';
 
 import outputs from '@/amplify_outputs.json';
-import AuthContextProvider from '@/app/AuthContextProvider';
 import ConfigureAmplifyClientSide from '@/app/ConfigureAmplifyClientSide';
 import Footer from '@/components/shared/Footer';
 import Header from '@/components/shared/Header';
@@ -21,14 +19,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <ConfigureAmplifyClientSide />
-        {/*TODO: clarify if we need an auth provider*/}
-        <AuthContextProvider>
-          <div className="grid grid-cols-1">
-            <Header />
-            <main>{children}</main>
-            <Footer />
-          </div>
-        </AuthContextProvider>
+        <div className="min-h-screen bg-[var(--bg-main)] text-[var(--foreground)] font-sans grid grid-rows-[auto_1fr_auto] selection:bg-[rgba(59,130,246,0.3)]">
+          <Header />
+          <main className="p-[var(--spacing-space-lg)] max-w-[1400px] mx-auto grid grid-cols-12 gap-[var(--spacing-space-md)] content-start w-full">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
