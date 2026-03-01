@@ -6,8 +6,9 @@ import { Amplify } from 'aws-amplify';
 import outputs from '@/amplify_outputs.json';
 import AuthContextProvider from '@/app/AuthContextProvider';
 import ConfigureAmplifyClientSide from '@/app/ConfigureAmplifyClientSide';
-
-import './globals.css';
+import Footer from '@/components/shared/Footer';
+import Header from '@/components/shared/Header';
+import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Fin Sight Dashboard',
@@ -20,7 +21,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <ConfigureAmplifyClientSide />
-        <AuthContextProvider>{children}</AuthContextProvider>
+        {/*TODO: clarify if we need an auth provider*/}
+        <AuthContextProvider>
+          <div className="grid grid-cols-1">
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </div>
+        </AuthContextProvider>
       </body>
     </html>
   );

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+@import 'tailwindcss';
+@plugin 'tailwindcss-animate';
+
+/* LAYER 1: DESIGN TOKENS (CSS Variables) */
+:root {
+  --primary: #3b82f6;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --bg-main: #0b0e14;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --border-dim: rgba(255, 255, 255, 0.05);
+  --glow-color: rgba(59, 130, 246, 0.15);
+  --blur-terminal: 12px;
+  --white: #ffffff;
+
+  /* Shadcn Compatibility Mappings */
+  --background: var(--bg-main);
+  --foreground: #e2e8f0;
+  --card: var(--card-bg);
+  --card-foreground: #e2e8f0;
+  --popover: #0b0e14;
+  --popover-foreground: #e2e8f0;
+  --primary-shadcn: var(--primary);
+  --primary-foreground: #ffffff;
+  --secondary: var(--border-dim);
+  --secondary-foreground: #e2e8f0;
+  --muted: var(--border-dim);
+  --muted-foreground: rgba(226, 232, 240, 0.4);
+  --accent: rgba(255, 255, 255, 0.05);
+  --accent-foreground: #e2e8f0;
+  --destructive: var(--danger);
+  --destructive-foreground: #ffffff;
+  --border: var(--border-dim);
+  --input: var(--border-dim);
+  --ring: var(--primary);
+  --radius: 0.75rem;
+}
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Spacing Scale */
+  --spacing-space-xs: 0.5rem;
+  --spacing-space-sm: 1rem;
+  --spacing-space-md: 1.5rem;
+  --spacing-space-lg: 2rem;
+  --spacing-space-xl: 3rem;
+  --spacing-header-height: 4rem;
+
+  /* Color Palette */
+  --color-primary: var(--primary);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-main: var(--bg-main);
+  --color-card: var(--card-bg);
+  --color-border-dim: var(--border-dim);
+  --color-glow: var(--glow-color);
+  --color-white: #ffffff;
+
+  --color-background: var(--bg-main);
+  --color-foreground: #e2e8f0;
+  --color-card-foreground: #e2e8f0;
+  --color-popover: #0b0e14;
+  --color-popover-foreground: #e2e8f0;
+  --color-primary-shadcn: var(--primary);
+  --color-primary-foreground: #ffffff;
+  --color-secondary: var(--border-dim);
+  --color-secondary-foreground: #e2e8f0;
+  --color-muted: var(--border-dim);
+  --color-muted-foreground: rgba(226, 232, 240, 0.4);
+  --color-accent: rgba(255, 255, 255, 0.05);
+  --color-accent-foreground: #e2e8f0;
+  --color-destructive: var(--danger);
+  --color-destructive-foreground: #ffffff;
+  --color-border: var(--border-dim);
+  --color-input: var(--border-dim);
+  --color-ring: var(--primary);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-entry: row-entry 0.4s ease-out forwards;
+
+  @keyframes row-entry {
+    0% {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/* LAYER 2: BASE (Global Resets) */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* LAYER 3: COMPONENTS (Design System Abstractions) */
+@layer components {
+  .glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--blur-terminal));
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glow-active {
+    box-shadow: 0 0 25px -5px var(--glow-color);
+    border-color: rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* LAYER 4: UTILITIES (Specific Fixes) */
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Custom Scrollbar Strategy */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-dim);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+}
