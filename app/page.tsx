@@ -1,5 +1,7 @@
+import { MetricPanel } from '@/components/features/metrics/MetricPanel';
+
 const Dashboard = async () => {
-  return <span>Main content</span>;
+  return <MetricPanel />;
 };
 
 export default Dashboard;
