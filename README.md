@@ -1,25 +1,79 @@
-## AWS Amplify Next.js (App Router) Starter Template
+# FinSight WhaleWatch MVP
 
-This repository provides a starter template for creating applications using Next.js (App Router) and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
+FinSight WhaleWatch is a professional reference MVP (Minimum Viable Product) demonstrating a modern, high-performance full-stack architecture. This project is built for educational purposes to showcase the seamless integration of Next.js 16, Tailwind CSS v4, and AWS Amplify Gen 2.
 
-## Overview
+The application simulates a real-time financial dashboard for tracking cryptocurrency transaction activity, focusing on robust design patterns and cloud-native infrastructure.
 
-This template equips you with a foundational Next.js application integrated with AWS Amplify, streamlined for scalability and performance. It is ideal for developers looking to jumpstart their project with pre-configured AWS services like Cognito, AppSync, and DynamoDB.
+---
 
-## Features
+## Technical Proof of Concept
 
-- **Authentication**: Setup with Amazon Cognito for secure user authentication.
-- **API**: Ready-to-use GraphQL endpoint with AWS AppSync.
-- **Database**: Real-time database powered by Amazon DynamoDB.
+This MVP serves as a verification that the following technologies are working in harmony:
 
-## Deploying to AWS
+1.  **Frontend & Framework:** Next.js 16 (App Router) with Turbopack for high-speed development and optimized server-side rendering.
+2.  **Design System:** Tailwind CSS v4 utilizing the new CSS-first `@theme` block for zero-runtime styling and strict design tokens.
+3.  **Backend-as-Code:** AWS Amplify Gen 2 providing a fully typed, TypeScript-first infrastructure including Auth, Data, and serverless Functions.
+4.  **Real-Time Simulation:** A scheduled Lambda function (cron) that populates a DynamoDB table via AppSync, demonstrating automated backend workflows.
 
-For detailed instructions on deploying your application, refer to the [deployment section](https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/#deploy-a-fullstack-app-to-aws) of our documentation.
+---
 
-## Security
+## Tech Stack
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+- **Framework:** Next.js 16.1.6
+- **Styling:** Tailwind CSS v4
+- **UI Components:** shadcn/ui
+- **Infrastructure:** AWS Amplify Gen 2 (Cognito, AppSync, DynamoDB, Lambda)
+- **Iconography:** Lucide React
 
-## License
+---
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+## AWS Architecture
+
+The project uses AWS Amplify Gen 2 to define the backend infrastructure entirely in TypeScript.
+
+### 1. Data Layer
+
+- GraphQL API defined in `amplify/data/resource.ts`.
+- Uses Amazon AppSync and DynamoDB to store and query transaction data.
+
+### 2. Authentication
+
+- Managed by Amazon Cognito through `amplify/auth/resource.ts`.
+- Supports email-based authentication for secure access.
+
+### 3. Serverless Functions
+
+- **seed-handler**: Triggered every minute via an EventBridge Rule (configured in `amplify/backend.ts`). This function prepares and injects mock transaction data into the database to simulate real-time ingestion.
+
+---
+
+## How to Start
+
+### 1. Prerequisites
+
+- Node.js 20 or later.
+- AWS Account and CLI for backend testing.
+
+### 2. Install Dependencies
+
+```bash
+npm install --legacy-peer-deps
+```
+
+### 3. Start AWS Sandbox
+
+Deploy your personal cloud sandbox to generate `amplify_outputs.json`:
+
+```bash
+npx ampx sandbox
+```
+
+### 4. Run the App
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the dashboard.
+
+---
