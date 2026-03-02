@@ -57,7 +57,7 @@ The project uses AWS Amplify Gen 2 to define the backend infrastructure entirely
 ### 2. Install Dependencies
 
 ```bash
-npm install --legacy-peer-deps
+npm install
 ```
 
 ### 3. Start AWS Sandbox
