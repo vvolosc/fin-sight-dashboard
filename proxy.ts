@@ -6,6 +6,13 @@ import { runWithAmplifyServerContext } from '@/utils/amplifyServerUtils';
 
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next();
+  const { pathname } = request.nextUrl;
+
+  const isPublicRoute = pathname === '/';
+
+  if (isPublicRoute) {
+    return response;
+  }
 
   const authenticated = await runWithAmplifyServerContext({
     nextServerContext: { request, response },
