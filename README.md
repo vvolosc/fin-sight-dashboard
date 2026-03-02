@@ -1,5 +1,7 @@
 # FinSight WhaleWatch MVP
 
+**Live Dashboard:** [https://main.d2izvnqlaz0t3z.amplifyapp.com/](https://main.d2izvnqlaz0t3z.amplifyapp.com/)
+
 FinSight WhaleWatch is a professional reference MVP (Minimum Viable Product) demonstrating a modern, high-performance full-stack architecture. This project is built for educational purposes to showcase the seamless integration of Next.js 16, Tailwind CSS v4, and AWS Amplify Gen 2.
 
 The application simulates a real-time financial dashboard for tracking cryptocurrency transaction activity, focusing on robust design patterns and cloud-native infrastructure.
