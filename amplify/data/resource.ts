@@ -1,5 +1,7 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 
+import { TransactionDirection } from '../../types';
+
 const schema = a.schema({
   Transaction: a
     .model({
@@ -7,9 +9,8 @@ const schema = a.schema({
       amount: a.float().required(),
       sender: a.string(),
       receiver: a.string(),
-      timestamp: a.datetime().required(),
-      isWhale: a.boolean(),
       expiration_time: a.integer().required(),
+      direction: a.enum([TransactionDirection.INFLOW, TransactionDirection.OUTFLOW]),
     })
     .authorization((allow) => [
       allow.publicApiKey().to(['read', 'create']),

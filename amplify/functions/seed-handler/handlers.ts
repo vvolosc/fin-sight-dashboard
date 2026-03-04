@@ -2,22 +2,32 @@ import { defaultProvider } from '@aws-sdk/credential-provider-node';
 import { Amplify } from 'aws-amplify';
 import { generateClient } from 'aws-amplify/api';
 
+import { Symbols, TransactionDirection } from '../../../types';
 import type { Schema } from '../../data/resource';
 
-const symbols = ['BTC', 'ETH', 'SOL', 'DOT', 'ADA'];
-
-const calculateTTL = (daysFromNow: number = 1) => {
-  const secondsInDay = 86400;
-  return Math.floor(Date.now() / 1000) + daysFromNow * secondsInDay;
-};
+const symbols = [Symbols.BTC, Symbols.ETH, Symbols.SOL, Symbols.DOT, Symbols.ADA];
+const EXCHANGES = [
+  'Binance_Hot_Wallet_3',
+  'Coinbase_Custody',
+  'Kraken_Exchange',
+  'OKX_Internal',
+  'Gemini_Cold_Storage',
+];
+const WHALES = [
+  'MicroStrategy_Llc',
+  'Tesla_Digital_Assets',
+  'Mt_Gox_Trustee',
+  'Jump_Crypto_Deposit',
+  'Unknown_Whale_0x71...',
+];
 
 export const handler = async () => {
   Amplify.configure(
     {
       API: {
         GraphQL: {
-          endpoint: process.env.AMPLIFY_DATA_GRAPHQL_ENDPOINT!,
-          region: process.env.AWS_REGION,
+          endpoint: process.env.AMPLIFY_DATA_GRAPHQL_ENDPOINT as string,
+          region: process.env.AWS_REGION as string,
           defaultAuthMode: 'iam',
         },
       },
@@ -32,7 +42,7 @@ export const handler = async () => {
               identityId: undefined,
             };
           },
-          clearCredentialsAndIdentityId: async () => {},
+          clearCredentialsAndIdentityId: async () => ({}),
         },
       },
     }
@@ -41,8 +51,19 @@ export const handler = async () => {
   const client = generateClient<Schema>();
 
   for (let i = 0; i < 20; i++) {
-    const randomSymbol = symbols[Math.floor(Math.random() * symbols.length)];
-    const randomAmount = parseFloat((Math.random() * 2).toFixed(4));
+    const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+    const amount = parseFloat((Math.random() * 2).toFixed(4));
+    const direction =
+      Math.random() > 0.5 ? TransactionDirection.INFLOW : TransactionDirection.OUTFLOW;
+    const sender =
+      direction === 'INFLOW'
+        ? WHALES[Math.floor(Math.random() * WHALES.length)]
+        : EXCHANGES[Math.floor(Math.random() * EXCHANGES.length)];
+    const receiver =
+      direction === 'INFLOW'
+        ? EXCHANGES[Math.floor(Math.random() * EXCHANGES.length)]
+        : WHALES[Math.floor(Math.random() * WHALES.length)];
+    const expirationTime = Math.floor(Date.now() / 1000) + 86400;
 
     try {
       const result = await client.graphql({
@@ -52,15 +73,20 @@ export const handler = async () => {
               id
               symbol
               amount
+              expiration_time
+              direction
             }
           }
         `,
         variables: {
           input: {
-            symbol: randomSymbol,
-            amount: randomAmount,
+            symbol,
+            amount,
             timestamp: new Date().toISOString(),
-            expiration_time: calculateTTL(),
+            expiration_time: expirationTime,
+            direction,
+            sender,
+            receiver,
           },
         },
       });
