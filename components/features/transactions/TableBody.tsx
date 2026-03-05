@@ -1,7 +1,6 @@
-import { ArrowDownLeft, ArrowUpRight, MoreHorizontal } from 'lucide-react';
+import { ArrowDownLeft, ArrowUpRight } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { TableCell, TableRow, TableBody as UITableBody } from '@/components/ui/table';
 import { Symbols, TransactionDirection } from '@/types';
 import { client } from '@/utils/amplify-server';
@@ -10,12 +9,18 @@ const assets = [
   { name: Symbols.BTC, color: '#F7931A' },
   { name: Symbols.ETH, color: '#627EEA' },
   { name: Symbols.DOT, color: '#14F195' },
-  { name: Symbols.ADA, color: '#14F196' },
-  { name: Symbols.SOL, color: '#14F197' },
+  { name: Symbols.ADA, color: '#E6007A' },
+  { name: Symbols.SOL, color: '#0033AD' },
 ];
 
 const TableBody: React.FC = async () => {
-  const { data: transactions = [] } = await client.models.Transaction.list();
+  const { data: transactions = [] } = await client.models.Transaction.list({
+    // TODO: remove filter and limit once old records are removed from db
+    limit: 300,
+    filter: {
+      and: [{ sender: { attributeExists: true } }, { receiver: { attributeExists: true } }],
+    },
+  });
 
   const getColor = (symbol: string) => assets.find(({ name }) => name === symbol)?.color;
 
@@ -39,7 +44,9 @@ const TableBody: React.FC = async () => {
             {tx.sender} <span className="text-blue-500 mx-1">→</span> {tx.receiver}
           </TableCell>
           <TableCell className="text-right">
-            <Badge variant={tx.direction === TransactionDirection.INFLOW ? 'default' : 'secondary'}>
+            <Badge
+              variant={tx.direction === TransactionDirection.INFLOW ? 'success' : 'destructive'}
+            >
               {tx.direction === TransactionDirection.INFLOW ? (
                 <ArrowDownLeft size={10} className="mr-1" />
               ) : (
@@ -47,11 +54,6 @@ const TableBody: React.FC = async () => {
               )}
               {tx.direction}
             </Badge>
-          </TableCell>
-          <TableCell>
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <MoreHorizontal size={14} />
-            </Button>
           </TableCell>
         </TableRow>
       ))}
