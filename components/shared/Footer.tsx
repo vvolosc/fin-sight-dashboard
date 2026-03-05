@@ -8,17 +8,17 @@ const Footer = () => {
       <div className="flex items-center gap-space-md">
         <span className="flex items-center gap-space-xs">
           <ShieldAlert size={12} className="text-foreground/40" />
-          SECURITY: AES_256_ACTIVE
+          Amplify demo
         </span>
         <div className="h-3 w-[1px] bg-border-dim" />
         <span className="flex items-center gap-space-xs text-primary/70">
           <Activity size={12} />
-          GLOBAL_SYNC: OK
+          AWS Lambda: Working
         </span>
       </div>
       <div className="flex items-center gap-space-xs opacity-50 hover:opacity-100 transition-opacity cursor-help">
         <Lock size={12} />
-        STATUS: PUBLIC_ACCESS
+        Deployed: IaC
       </div>
     </footer>
   );

@@ -14,7 +14,7 @@ const Header = () => {
             FinSight
           </span>
           <span className="text-[9px] font-bold text-primary uppercase tracking-[0.25em] mt-1 opacity-80">
-            Institutional_v2
+            dashboard
           </span>
         </div>
       </div>
