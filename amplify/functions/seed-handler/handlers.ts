@@ -75,6 +75,8 @@ export const handler = async () => {
               amount
               expiration_time
               direction
+              sender
+              receiver
             }
           }
         `,
@@ -82,7 +84,6 @@ export const handler = async () => {
           input: {
             symbol,
             amount,
-            timestamp: new Date().toISOString(),
             expiration_time: expirationTime,
             direction,
             sender,
