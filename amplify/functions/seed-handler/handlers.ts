@@ -56,11 +56,11 @@ export const handler = async () => {
     const direction =
       Math.random() > 0.5 ? TransactionDirection.INFLOW : TransactionDirection.OUTFLOW;
     const sender =
-      direction === 'INFLOW'
+      direction === TransactionDirection.INFLOW
         ? WHALES[Math.floor(Math.random() * WHALES.length)]
         : EXCHANGES[Math.floor(Math.random() * EXCHANGES.length)];
     const receiver =
-      direction === 'INFLOW'
+      direction === TransactionDirection.INFLOW
         ? EXCHANGES[Math.floor(Math.random() * EXCHANGES.length)]
         : WHALES[Math.floor(Math.random() * WHALES.length)];
     const expirationTime = Math.floor(Date.now() / 1000) + 86400;
@@ -70,13 +70,16 @@ export const handler = async () => {
         query: `
           mutation CreateTransaction($input: CreateTransactionInput!) {
             createTransaction(input: $input) {
-              id
-              symbol
-              amount
-              expiration_time
-              direction
-              sender
-              receiver
+               id
+                symbol
+                amount
+                expiration_time
+                direction
+                sender
+                receiver
+                createdAt
+                updatedAt
+                type
             }
           }
         `,
@@ -88,11 +91,11 @@ export const handler = async () => {
             direction,
             sender,
             receiver,
+            type: 'TRANSACTION',
           },
         },
       });
-
-      return result;
+      console.log('Transaction created:', result);
     } catch (err) {
       console.error('Mutation failed:', err);
     }

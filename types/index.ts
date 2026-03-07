@@ -1,5 +1,7 @@
 import React from 'react';
 
+import type { Schema } from '@/amplify/data/resource';
+
 export interface MetricData {
   label: string;
   val: string;
@@ -18,3 +20,5 @@ export enum TransactionDirection {
   INFLOW = 'INFLOW',
   OUTFLOW = 'OUTFLOW',
 }
+
+export type Transaction = Schema['Transaction']['type'];

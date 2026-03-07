@@ -11,12 +11,14 @@ const schema = a.schema({
       receiver: a.string(),
       expiration_time: a.integer().required(),
       direction: a.enum([TransactionDirection.INFLOW, TransactionDirection.OUTFLOW]),
+      type: a.string().required(),
+      createdAt: a.datetime().required(),
     })
     .authorization((allow) => [
-      allow.publicApiKey().to(['read', 'create']),
-      allow.authenticated('identityPool').to(['create', 'read']), // for authenticated users
-      allow.guest().to(['read', 'create']), // for iam
-    ]),
+      allow.guest().to(['read', 'create']),
+      allow.publicApiKey().to(['read']),
+    ])
+    .secondaryIndexes((index) => [index('type').sortKeys(['createdAt']).queryField('listByDate')]),
 });
 
 export type Schema = ClientSchema<typeof schema>;

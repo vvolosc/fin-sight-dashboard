@@ -22,6 +22,13 @@
   --color-glow: rgba(59, 130, 246, 0.25);
   --color-white: #ffffff;
 
+  /* Asset Colors */
+  --color-btc: #f7931a;
+  --color-eth: #627eea;
+  --color-sol: #14f195;
+  --color-dot: #e6007a;
+  --color-ada: #0033ad;
+
   --color-background: #0b0e14;
   --color-foreground: #e2e8f0;
   --color-card-foreground: #e2e8f0;
@@ -46,16 +53,18 @@
   --radius-lg: 0.85rem;
   --radius-xl: calc(0.85rem + 4px);
 
-  --animate-entry: row-entry 0.4s ease-out forwards;
+  --animate-entry: row-entry 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 
   @keyframes row-entry {
     0% {
       opacity: 0;
-      transform: translateY(8px) scale(0.99);
+      transform: translateY(10px) scale(0.98);
+      filter: blur(4px) brightness(1.5);
     }
     100% {
       opacity: 1;
       transform: translateY(0) scale(1);
+      filter: blur(0) brightness(1);
     }
   }
 }
@@ -79,5 +88,23 @@
     background-color: var(--bg-main);
     color: var(--foreground);
     font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-btc {
+    background-color: var(--color-btc);
+  }
+  .bg-eth {
+    background-color: var(--color-eth);
+  }
+  .bg-sol {
+    background-color: var(--color-sol);
+  }
+  .bg-dot {
+    background-color: var(--color-dot);
+  }
+  .bg-ada {
+    background-color: var(--color-ada);
   }
 }
