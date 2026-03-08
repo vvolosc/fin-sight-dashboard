@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Schema } from '@/amplify/data/resource';
+import type { Schema } from '../amplify/data/resource';
 
 export interface MetricData {
   label: string;
